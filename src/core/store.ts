@@ -8,6 +8,8 @@ export interface Contact {
   relays: string[]
   addedAt: number
   avatar?: string // mascot id they chose
+  lastSeen?: number // last time a direct connection was open
+  verified?: boolean // safety number compared in person
 }
 
 export type MessageStatus = 'pending' | 'sent' | 'delivered'
@@ -23,6 +25,7 @@ export interface ChatMessage {
 export interface Settings {
   relays: string[]
   iceServers: RTCIceServer[]
+  notifications?: boolean
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -88,4 +91,27 @@ export function saveMessages(pk: string, messages: ChatMessage[]): void {
 
 export function deleteMessages(pk: string): void {
   localStorage.removeItem(key(`messages:${pk}`))
+}
+
+export function loadUnread(): Record<string, number> {
+  return read<Record<string, number>>('unread', {})
+}
+
+export function saveUnread(unread: Record<string, number>): void {
+  write('unread', unread)
+}
+
+export function saveSettings(settings: Partial<Settings>): void {
+  write('settings', { ...read<Partial<Settings>>('settings', {}), ...settings })
+}
+
+/** Remove everything this profile stored: identity, contacts, chats and settings. */
+export function eraseAll(): void {
+  const prefix = key('')
+  for (const k of Object.keys(localStorage)) {
+    // An unnamed profile must not wipe named ones (`p2pmsg:bob:…`).
+    if (!k.startsWith(prefix)) continue
+    if (!ns && k.slice(prefix.length).includes(':') && !/^(messages):/.test(k.slice(prefix.length))) continue
+    localStorage.removeItem(k)
+  }
 }

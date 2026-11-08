@@ -1,9 +1,4 @@
-import QRCode from 'qrcode'
 import jsQR from 'jsqr'
-
-export function renderQr(canvas: HTMLCanvasElement, text: string): Promise<void> {
-  return QRCode.toCanvas(canvas, text, { errorCorrectionLevel: 'M', margin: 2, width: 280 })
-}
 
 /**
  * Scan QR codes from the camera into `video`. Calls `onResult` once with the first

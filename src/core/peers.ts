@@ -21,6 +21,7 @@ export type WireMessage =
   | { t: 'msg'; id: string; text: string; ts: number }
   | { t: 'ack'; id: string }
   | { t: 'profile'; n: string; a?: string }
+  | { t: 'typing' }
 
 interface Session {
   pc: RTCPeerConnection
