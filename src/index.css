@@ -1,0 +1,450 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter/opsz.css";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Messenger, in the Share app's design language (~/projects/share/ui/src/index.css). The tokens
+ * below are Share's; the additions for chat (bubbles, amber "connecting" signal, key art, the link
+ * between two people) follow the same rules: Apple system colours for signals, an -ink variant for
+ * words on a 14% tint.
+ */
+
+@theme inline {
+    --font-heading: var(--font-sans);
+    /* Type scale (desktop): 11 caption · 12 detail · 13 body · 15 emphasis · 17 title 3 · 22 title 2 · 26 large title */
+    --text-xs: 0.75rem;
+    --text-xs--line-height: 1rem;
+    --text-sm: 0.8125rem;
+    --text-sm--line-height: 1.25rem;
+    --text-base: 0.9375rem;
+    --text-base--line-height: 1.375rem;
+    --text-lg: 1.0625rem;
+    --text-lg--line-height: 1.5rem;
+    --text-xl: 1.375rem;
+    --text-xl--line-height: 1.75rem;
+    --text-2xl: 1.625rem;
+    --text-2xl--line-height: 2rem;
+    --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    /* Share: link lights (online, activity) */
+    --color-online: var(--online);
+    --color-activity: var(--activity);
+    /* Window language (Settings first): window ground, grouped rows, hairlines, control fills */
+    --color-window: var(--window);
+    --color-group: var(--group);
+    --color-separator: var(--separator);
+    --color-fill: var(--fill);
+    --color-fill-strong: var(--fill-strong);
+    --color-field: var(--field);
+    --color-chrome: var(--chrome);
+    --color-badge: var(--badge);
+    --color-link: var(--link);
+    --color-seg-track: var(--seg-track);
+    --color-seg-thumb: var(--seg-thumb);
+    --color-zebra: var(--zebra);
+    --color-bubble-in: var(--bubble-in);
+    --color-sig-green: var(--sig-green);
+    --color-sig-green-ink: var(--sig-green-ink);
+    --color-sig-blue: var(--sig-blue);
+    --color-sig-blue-ink: var(--sig-blue-ink);
+    --color-sig-amber: var(--sig-amber);
+    --color-sig-amber-ink: var(--sig-amber-ink);
+    --color-sig-gray: var(--sig-gray);
+    --color-sig-gray-ink: var(--sig-gray-ink);
+    --color-sig-red: var(--sig-red);
+    --color-sig-red-ink: var(--sig-red-ink);
+    --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+    /* Radii, concentric: window 18 → group 12 → control 8 → chip 6 */
+    --radius-window: 18px;
+    --radius-group: 12px;
+    --radius-control: 8px;
+    --radius-chip: 6px;
+    --shadow-group: 0 0 0 1px var(--separator), 0 1px 2px rgb(0 0 0 / 0.04);
+    --shadow-field: inset 0 0 0 1px var(--field-edge), inset 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-field-hover: inset 0 0 0 1px var(--field-edge-hover), inset 0 1px 2px rgb(0 0 0 / 0.05);
+    --shadow-field-focus: inset 0 0 0 1px var(--ring), 0 0 0 3px var(--focus-halo);
+    --shadow-field-invalid: inset 0 0 0 1px var(--destructive), 0 0 0 3px var(--invalid-halo);
+    --shadow-popover: 0 0 0 1px var(--window-edge), 0 12px 32px -8px rgb(0 0 0 / 0.22), 0 4px 10px -4px rgb(0 0 0 / 0.1);
+    --shadow-window: 0 0 0 1px var(--window-edge), 0 24px 64px -12px rgb(0 0 0 / 0.28), 0 8px 20px -8px rgb(0 0 0 / 0.16);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/*
+ * Share palette, taken from the earlier Share frontend (~/share/frontend/src/index.css): cool
+ * grey-green paper with near-black green-grey ink in light, graphite in dark. Buttons and links are
+ * Apple blue (#0071E3 carries white at 4.7:1; links use a blue that reads on the ground), focus is
+ * Apple's system blue, and the Activity capsules use Apple's system colours. The logo keeps its own
+ * cable blue (components/mark.tsx).
+ * The app is one surface (header, devices, Activity), split by hairlines; dialogs keep the grey-green
+ * ground (--window) so their white groups stand out.
+ *   light: ground #EDF0EC  card #FFFFFF  ink #202723  secondary #545E58 (5.9:1 on ground)  line #D9DFD7
+ *   dark:  ground #101112  card #1B1D1F  ink #F4F5F4  secondary #B1B6B8 (8.3:1 on card)    line #34383B
+ */
+:root {
+    --background: #ffffff;
+    --foreground: #202723;
+    --card: #ffffff;
+    --card-foreground: #202723;
+    --popover: #ffffff;
+    --popover-foreground: #202723;
+    --primary: #0071e3;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f3f0;
+    --secondary-foreground: #202723;
+    --muted: #e7ebe6;
+    --muted-foreground: #545e58;
+    --accent: #e1e6df;
+    --accent-foreground: #202723;
+    --destructive: #b5293d;
+    --border: #d9dfd7;
+    --input: #7a857c;
+    --ring: #007aff;
+    /* Text links and text-only buttons. */
+    --link: #0062cc;
+    --online: #276644;
+    --activity: #775810;
+    --chart-1: #0071e3;
+    --chart-2: #276644;
+    --chart-3: #775810;
+    --chart-4: #545e58;
+    --chart-5: #202723;
+    --radius: 0.625rem;
+    --sidebar: #ffffff;
+    --sidebar-foreground: #202723;
+    --sidebar-primary: #0071e3;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #e1e6df;
+    --sidebar-accent-foreground: #202723;
+    --sidebar-border: #d9dfd7;
+    --sidebar-ring: #007aff;
+    /* Window language: the ground, grouped rows on cards, hairlines and control fills. */
+    --window: #edf0ec;
+    --group: #ffffff;
+    --separator: #d9dfd7;
+    --fill: rgb(32 39 35 / 0.055);
+    --fill-strong: rgb(32 39 35 / 0.1);
+    --field: #edf0ec;
+    --switch-off: #dde2dc;
+    --switch-edge: rgb(32 39 35 / 0.1);
+    --chrome: #ffffff;
+    /* Segmented controls: a recessed track, the chosen segment a raised thumb (white in light, lighter in dark). */
+    --seg-track: #eceeeb;
+    --seg-thumb: #ffffff;
+    /*
+     * Dialogs (sheets) sit on the card colour; their grouped rows are recessed into it and their fields
+     * stand out of the groups: Apple grey groups and white fields in light. In dark the groups are lifted
+     * a step above the sheet (#232528 on #1B1D1F) and fields sit slightly recessed in them.
+     */
+    --sheet-group: #f5f5f7;
+    --sheet-field: #ffffff;
+    /* Alternate list rows. */
+    --zebra: #f8f8f8;
+    --badge: #ff3b30;
+    --field-edge: rgb(32 39 35 / 0.17);
+    --field-edge-hover: rgb(32 39 35 / 0.3);
+    --scroll-thumb: rgb(0 0 0 / 0.24);
+    --scroll-thumb-hover: rgb(0 0 0 / 0.45);
+    --focus-halo: rgb(0 122 255 / 0.22);
+    --invalid-halo: rgb(181 41 61 / 0.2);
+    --window-edge: rgb(32 39 35 / 0.12);
+    /*
+     * Activity signals: what happened to an entry, said by one tinted capsule (received green, sent
+     * blue, failed red, commands purple, everything else grey). Apple's system colours: the plain
+     * name fills (tint, bar); -ink is the accessible variant for the words and the capsule's disc,
+     * 4.5:1 or more on its own 14% tint.
+     */
+    --sig-green: #34c759;
+    --sig-green-ink: #1f7534;
+    --sig-blue: #007aff;
+    --sig-blue-ink: #0040dd;
+    --sig-red: #ff3b30;
+    --sig-red-ink: #c60013;
+    --sig-gray: #8e8e93;
+    --sig-gray-ink: #646468;
+    --sig-indigo: #af52de;
+    --sig-indigo-ink: #8944ab;
+    --sig-amber: #ff9500;
+    --sig-amber-ink: #775810;
+    --bubble-in: #e7ebe6;
+    --keyart-bg: 92% 30%;
+    --keyart-fg: 36% 45%;
+}
+
+.dark {
+    --background: #1b1d1f;
+    --foreground: #f4f5f4;
+    --card: #1b1d1f;
+    --card-foreground: #f4f5f4;
+    --popover: #1b1d1f;
+    --popover-foreground: #f4f5f4;
+    --primary: #0071e3;
+    --primary-foreground: #ffffff;
+    --secondary: #25282b;
+    --secondary-foreground: #f4f5f4;
+    --muted: #25282b;
+    --muted-foreground: #b1b6b8;
+    --accent: #323539;
+    --accent-foreground: #f4f5f4;
+    --destructive: #ffa0a5;
+    --border: #34383b;
+    --input: #72787e;
+    --ring: #0a84ff;
+    --link: #409cff;
+    --online: #a4e6bc;
+    --activity: #efcf89;
+    --chart-1: #409cff;
+    --chart-2: #a4e6bc;
+    --chart-3: #efcf89;
+    --chart-4: #b1b6b8;
+    --chart-5: #f4f5f4;
+    --sidebar: #1b1d1f;
+    --sidebar-foreground: #f4f5f4;
+    --sidebar-primary: #0071e3;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #323539;
+    --sidebar-accent-foreground: #f4f5f4;
+    --sidebar-border: #34383b;
+    --sidebar-ring: #0a84ff;
+    --window: #101112;
+    --group: #1b1d1f;
+    --separator: #34383b;
+    --fill: rgb(255 255 255 / 0.06);
+    --fill-strong: rgb(255 255 255 / 0.11);
+    --field: #151719;
+    --switch-off: #3a3e42;
+    --switch-edge: rgb(255 255 255 / 0.07);
+    --chrome: #1b1d1f;
+    --seg-track: #25282b;
+    --seg-thumb: #3a3d41;
+    --sheet-group: #232528;
+    --sheet-field: #1b1d1f;
+    --zebra: #222426;
+    --badge: #ff453a;
+    --field-edge: rgb(255 255 255 / 0.12);
+    --field-edge-hover: rgb(255 255 255 / 0.22);
+    --scroll-thumb: rgb(255 255 255 / 0.28);
+    --scroll-thumb-hover: rgb(255 255 255 / 0.5);
+    --focus-halo: rgb(10 132 255 / 0.3);
+    --invalid-halo: rgb(255 160 165 / 0.25);
+    --window-edge: rgb(255 255 255 / 0.1);
+    --sig-green: #30d158;
+    --sig-green-ink: #30db5b;
+    --sig-blue: #0a84ff;
+    --sig-blue-ink: #409cff;
+    --sig-red: #ff453a;
+    --sig-red-ink: #ff6961;
+    --sig-gray: #8e8e93;
+    --sig-gray-ink: #aeaeb2;
+    --sig-indigo: #bf5af2;
+    --sig-indigo-ink: #da8fff;
+    --sig-amber: #ff9f0a;
+    --sig-amber-ink: #efcf89;
+    --bubble-in: #2a2d30;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  body {
+    @apply bg-background text-sm text-foreground;
+    }
+  h1, h2 {
+    letter-spacing: -0.015em;
+    }
+  ::selection {
+    background: var(--focus-halo);
+    }
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    }
+}
+/* Hairlines between rows of a grouped list, edge to edge. */
+@utility inset-divide {
+  & > * + * {
+    position: relative;
+  }
+  & > * + *::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 1px;
+    background: var(--separator);
+  }
+}
+
+/*
+ * Scrollbars: thin, rounded, Mac-like. A transparent border insets the thumb from the edge;
+ * the track is invisible. WebKitGTK (the desktop window) and Chromium use the ::-webkit rules;
+ * other engines get the standard properties.
+ */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+    background: transparent;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scroll-thumb);
+    background-clip: content-box;
+    border: 3px solid transparent;
+    border-radius: 999px;
+    min-height: 36px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-thumb-hover);
+    border-width: 2px;
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: var(--scroll-thumb) transparent;
+    }
+  }
+}
+
+/* A running entry's status disc: a soft ring breathes out from it (Activity). */
+@keyframes sig-live {
+  50% {
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--sig) 35%, transparent);
+  }
+}
+
+/* An Activity row arriving (side-panel.tsx, ENTER): it fades in and rises into place. */
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* Increased contrast: stronger secondary text, hairlines and field edges (accessibility.md). */
+@media (prefers-contrast: more) {
+  :root:not(.dark) {
+    --muted-foreground: #3c4540;
+    --separator: #a3ada5;
+    --border: #a3ada5;
+    --field-edge: rgb(32 39 35 / 0.45);
+    --bubble-in: #dce2db;
+  }
+  .dark {
+    --muted-foreground: #d5d9da;
+    --separator: #5b6166;
+    --border: #5b6166;
+    --field-edge: rgb(255 255 255 / 0.35);
+    --bubble-in: #34383b;
+  }
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+    font-feature-settings: 'cv11', 'ss01';
+  }
+  /* Under 16px, iPhone zooms the page when a field takes focus. */
+  @media (pointer: coarse) {
+    input, textarea {
+      font-size: max(16px, 1em) !important;
+    }
+  }
+}
+
+/* Key fingerprint art: hue from the key, lightness from the theme. */
+.keyart-bg {
+  fill: hsl(var(--h) 30% 92%);
+}
+.keyart-fg {
+  fill: hsl(var(--h) 45% 36%);
+}
+.dark .keyart-bg {
+  fill: hsl(var(--h) 18% 22%);
+}
+.dark .keyart-fg {
+  fill: hsl(var(--h) 45% 74%);
+}
+
+/* The link between two people (the app's signature): it "flows" while a connection is being made. */
+@keyframes link-flow {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+@keyframes typing-dot {
+  0%, 60%, 100% {
+    opacity: 0.35;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+@keyframes msg-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

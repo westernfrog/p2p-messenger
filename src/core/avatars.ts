@@ -22,15 +22,3 @@ export function defaultMascot(pk: string): string {
 export function mascotFor(pk: string, chosen?: string): string {
   return isMascot(chosen) ? chosen : defaultMascot(pk)
 }
-
-/** Avatar markup: the character in a soft circle, with an optional presence light. */
-export function avatarHtml(
-  pk: string,
-  mascot: string | undefined,
-  size: number,
-  presence?: 'offline' | 'connecting' | 'connected',
-): string {
-  const id = mascotFor(pk, mascot)
-  const light = presence ? `<span class="presence ${presence}" aria-hidden="true"></span>` : ''
-  return `<span class="avatar" style="--size:${size}px" aria-hidden="true"><span class="avatar-clip"><img src="${mascotUrl(id)}" alt="" draggable="false" width="${size}" height="${size}"></span>${light}</span>`
-}
